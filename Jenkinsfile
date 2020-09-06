@@ -2,20 +2,17 @@
 pipeline {
 environment {
     registry = "thankachitra/nodejsrepo"
-    registryCredential = ‘dockerhub’
-    dockerImage = ''
+    registryCredential = "dockerhub"
+
   }
     agent any
     parameters {
         string(name: 'Greeting', defaultValue: 'welcome to DevOps', description: 'How should I expert in this DevOps world?')
     }
     stages {
-        stage('Example') {
+        stage('Examplea') {
             steps {
                 echo "${params.Greeting} World!"
-                
-            }
-             steps {
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
             }
         }
@@ -42,7 +39,7 @@ environment {
                 echo 'Starting to build docker image'
 
                 script {
-					dockerImage = docker.build("my-image:${env.BUILD_NUMBER}")
+					def dockerImage = docker.build("my-image:${env.BUILD_NUMBER}")
 					   withDockerRegistry([ credentialsId: "dockerhub	", url: "https://hub.docker.com/repository/docker/thankachitra/nodejsrepo>" ]) {
 					 // following commands will be executed within logged docker registry
 					 // sh docker push dockerImage
