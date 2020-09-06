@@ -10,7 +10,7 @@ environment {
     parameters {
         string(name: 'Greeting', defaultValue: 'welcome to DevOps', description: 'How should I expert in this DevOps world?')
     }
-    stages {
+   // stages {
         stage('Example') {
             steps {
                 echo "${params.Greeting} World!"
@@ -69,5 +69,5 @@ environment {
 		sh "docker rmi $registry:$BUILD_NUMBER"
 		}
 	}
-	}
+	//}
 }
