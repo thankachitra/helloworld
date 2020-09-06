@@ -12,10 +12,10 @@ environment {
     }
    // stages {
         stage('Example') {
-            steps {
+            //steps {
                 echo "${params.Greeting} World!"
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-            }
+           // }
         }
         
 	//stage('Checkout') {
@@ -31,9 +31,9 @@ environment {
 	//		}
 	
 	stage('Cloning our Git') {
-		steps {
+	//	steps {
 			git 'https://github.com/thankachitra/helloworld.git'
-		}
+	//	}
 	}
       
       
@@ -65,9 +65,9 @@ environment {
 	
         
 	stage('Cleaning upRemove Unused docker image') {
-		steps{
+	//	steps{
 		sh "docker rmi $registry:$BUILD_NUMBER"
-		}
+	//	}
 	}
 	//}
 }
