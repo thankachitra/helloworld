@@ -3,7 +3,7 @@ pipeline {
 environment {
     registry = "thankachitra/nodejsrepo"
     registryCredential = "dockerhub"
-	def dockerImage ="";
+	dockerImage ="";
   }
     agent any
     parameters {
@@ -34,13 +34,13 @@ environment {
 			git 'https://github.com/thankachitra/helloworld.git'
 		}
 	}
-      stage('Build image') {
+      stage('Build image & push to docker hub repository') {
             steps {
                 echo 'Starting to build docker image'
 				 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 script {
 						//dockerImage = docker.build("my-image:${env.BUILD_NUMBER}")
-						docker.build registry + ":$BUILD_NUMBER"
+						dockerImage = docker.build registry + ":$BUILD_NUMBER"
 						docker.withRegistry( '', registryCredential ) {
 							dockerImage.push()
 						}
@@ -48,6 +48,8 @@ environment {
 						 // following commands will be executed within logged docker registry
 						 // sh docker push dockerImage
 						 //dockerImage.push();
+						 env.GIT_COMMIT = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
+						 echo env.GIT_COMMIT
 						}
                 }
             }
