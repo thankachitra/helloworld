@@ -37,8 +37,9 @@ environment {
       stage('Build image & push to docker hub repository') {
             steps {
                 echo 'Starting to build docker image'
-				 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+				echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 script {
+                		import jenkins.model.Jenkins
 						//dockerImage = docker.build("my-image:${env.BUILD_NUMBER}")
 						dockerImage = docker.build registry + ":$BUILD_NUMBER"
 						docker.withRegistry( '', registryCredential ) {
