@@ -36,7 +36,17 @@ environment {
 	//	}
 	}
       
-      
+     def dockerImage
+
+	 stage('Build image') {
+	    dockerImage = docker.build("username/repository:tag")
+	  }
+  
+	  stage('Push image') {
+	    docker.withRegistry('https://hub.docker.com/repository/docker/thankachitra/nodejsrepo', 'registryCredential') {
+	      dockerImage.push()
+	    }
+	  }
       
 //   stage('Build image & push to docker hub repository') {
 //            steps {
@@ -60,7 +70,9 @@ environment {
 
 
 	stage('create docker image') {
-		sh "docker build --pull --no-cache -t 'my-image:${env.BUILD_NUMBER}' ."
+		//sh "docker build --pull --no-cache -t 'my-image:${env.BUILD_NUMBER}' ."
+		
+		
 		docker.withRegistry( 'https://hub.docker.com/repository/docker/thankachitra/nodejsrepo', registryCredential ) {
 			sh "docker push 'my-image:${env.BUILD_NUMBER}'"
 		}
