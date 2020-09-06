@@ -61,7 +61,7 @@ environment {
 
 	stage('create docker image') {
 		sh "docker build --pull --no-cache -t 'my-image:${env.BUILD_NUMBER}' ."
-		docker.withRegistry( '', registryCredential ) {
+		docker.withRegistry( 'https://hub.docker.com/repository/docker/thankachitra/nodejsrepo', registryCredential ) {
 			sh "docker push 'my-image:${env.BUILD_NUMBER}'"
 		}
 	}
