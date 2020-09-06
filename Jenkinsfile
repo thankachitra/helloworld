@@ -3,7 +3,7 @@ pipeline {
 environment {
     registry = "thankachitra/nodejsrepo"
     registryCredential = "dockerhub"
-
+	def dockerImage ="";
   }
     agent any
     parameters {
@@ -37,18 +37,22 @@ environment {
       stage('Build image') {
             steps {
                 echo 'Starting to build docker image'
-
+				 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 script {
-					def dockerImage = docker.build("my-image:${env.BUILD_NUMBER}")
-					   withDockerRegistry([ credentialsId: "dockerhub	", url: "https://hub.docker.com/repository/docker/thankachitra/nodejsrepo" ]) {
-					 // following commands will be executed within logged docker registry
-					 // sh docker push dockerImage
-					 dockerImage.push();
-					}
+						//dockerImage = docker.build("my-image:${env.BUILD_NUMBER}")
+						docker.build registry + ":$BUILD_NUMBER"
+						docker.withRegistry( '', registryCredential ) {
+							dockerImage.push()
+						}
+						//   withDockerRegistry([ credentialsId: "dockerhub	", url: "https://hub.docker.com/repository/docker/thankachitra/nodejsrepo" ]) {
+						 // following commands will be executed within logged docker registry
+						 // sh docker push dockerImage
+						 //dockerImage.push();
+						}
                 }
             }
-        }
-	stage('Cleaning up') {
+        
+	stage('Cleaning upRemove Unused docker image') {
 		steps{
 		sh "docker rmi $registry:$BUILD_NUMBER"
 		}
