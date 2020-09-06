@@ -40,7 +40,7 @@ environment {
 
                 script {
 					def dockerImage = docker.build("my-image:${env.BUILD_NUMBER}")
-					   withDockerRegistry([ credentialsId: "dockerhub	", url: "https://hub.docker.com/repository/docker/thankachitra/nodejsrepo>" ]) {
+					   withDockerRegistry([ credentialsId: "dockerhub	", url: "https://hub.docker.com/repository/docker/thankachitra/nodejsrepo" ]) {
 					 // following commands will be executed within logged docker registry
 					 // sh docker push dockerImage
 					 dockerImage.push();
