@@ -61,7 +61,11 @@ environment {
 
 	stage('create docker image') {
 		sh "docker build --pull --no-cache -t 'my-image:${env.BUILD_NUMBER}' ."
+		docker.withRegistry( '', registryCredential ) {
+			sh "docker push 'my-image:${env.BUILD_NUMBER}'"
+		}
 	}
+	
 	
         
 	stage('Cleaning upRemove Unused docker image') {
