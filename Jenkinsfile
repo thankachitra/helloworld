@@ -1,14 +1,8 @@
 
 pipeline {
 
-  agent none
-  environment {
-    registry = "https://hub.docker.com/repository/docker/thankachitra/nodejsrepo"
-    registryCredential = "dockerhub"
-    dockerHubUser="thankachitra";
-    dockerHubPasswor="Abcd123456";
-	dockerImage ="";
-  }
+  agent any
+
   stages {
  
   	stage('Example') {
