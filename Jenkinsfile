@@ -27,7 +27,9 @@ pipeline {
     stage('Docker Push') {
       agent any
       steps {
-        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'Abcd123456', usernameVariable: 'thankachitra')]) {
+      
+ 
+        withCredentials([usernamePassword(credentialsId: 'dockerHub1', passwordVariable: 'Abcd123456', usernameVariable: 'thankachitra')]) {
           sh "docker login -u 'thankachitra' -p 'Abcd123456'"
           sh 'docker push my-image:latest'
         }
