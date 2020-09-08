@@ -26,15 +26,17 @@ environment {
 	}
 
 	stage('create docker image') {
-		echo "${params.registry}"
+		echo "asfdasfasd"
 		echo "${params.registryCredential}"
 		
 		
 		sh "docker build --pull --no-cache -t 'my-image:${env.BUILD_NUMBER}' ."
 		
-		docker.withRegistry( 'https://hub.docker.com/repository/docker/thankachitra/nodejsrepo', registryCredential ) {
+		docker.withRegistry( 'https://hub.docker.com/repository/docker/thankachitra/nodejsrepo', 'dockerhub' ) {
 		sh "docker push 'my-image:${env.BUILD_NUMBER}'"
+		echo "aaaaaaaaa"
 		}
+			echo "bbbbbbbbbb"
 	}
 	
 	
