@@ -28,29 +28,18 @@ environment {
 	stage('create docker image') {
 	
 	
-//		echo "asfdasfasd"
+		echo "asfdasfasd"
 //		echo "${params.registryCredential}"
 //		
 //		
-//		sh "docker build --pull --no-cache -t 'my-image:${env.BUILD_NUMBER}' ."
+			sh "docker build --pull --no-cache -t 'my-image:${env.BUILD_NUMBER}' ."
 //		
 //		docker.withRegistry( 'https://hub.docker.com/repository/docker/thankachitra/nodejsrepo', 'dockerhub' ) {
 //		sh "docker push 'my-image:${env.BUILD_NUMBER}'"
 //		echo "aaaaaaaaa"
 //		}
-//			echo "bbbbbbbbbb"
-		node {
 		echo "bbbbbbbbbb"
-		git 'https://github.com/thankachitra/helloworld.git'
-		  docker.withRegistry('https://hub.docker.com/repository/docker/thankachitra/nodejsrepo', 'dockerhub') {
 	
-	        def customImage = docker.build("my-image:${env.BUILD_NUMBER}")
-	
-	        /* Push the container to the custom Registry */
-	        customImage.push()
-	    	}
-	    }
-	    echo "cccccc"
     
 	}
 	
