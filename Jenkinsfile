@@ -25,8 +25,8 @@ pipeline {
       }
     }
     
-     stages {
-        stage('Example') {
+     
+        stage('Examplae') {
             environment { 
                 ARTIFACTORY_CREDENTIALS = credentials('dockerhub') 
             }
@@ -34,7 +34,7 @@ pipeline {
                 echo "user: $ARTIFACTORY_CREDENTIALS_USR password: $ARTIFACTORY_CREDENTIALS_PSW"
             }
         }
-    }
+
     stage('Docker Push') {
       agent any
       steps {
