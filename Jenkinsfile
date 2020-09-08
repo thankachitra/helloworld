@@ -7,6 +7,12 @@ environment {
     parameters {
         string(name: 'Greeting', defaultValue: 'welcome to DevOps', description: 'How should I expert in this DevOps world?')
     }
+    parameters {
+        string(name: 'registry', defaultValue: 'https://hub.docker.com/repository/docker/thankachitra/nodejsrepo', description: 'How should I expert in this DevOps world?')
+    }
+     parameters {
+        string(name: 'registryCredential', defaultValue: 'dockerhub', description: 'How should I expert in this DevOps world?')
+    }
         stage('Example') {
                 echo "${params.Greeting} World!"
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
@@ -20,8 +26,8 @@ environment {
 	}
 
 	stage('create docker image') {
-		echo "${registry}"
-		echo "${registryCredential}"
+		echo "${params.registry}"
+		echo "${params.registryCredential}"
 		
 		
 		sh "docker build --pull --no-cache -t 'my-image:${env.BUILD_NUMBER}' ."
