@@ -19,11 +19,7 @@ pipeline {
     }
     
      
-	stage('Examplae') {
-		steps {
-		//    echo "user: $ARTIFACTORY_CREDENTIALS_USR password: $ARTIFACTORY_CREDENTIALS_PSW"
-		    }
-	}
+	
 
     stage('Docker Push') {
     steps {
