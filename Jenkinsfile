@@ -24,11 +24,20 @@ pipeline {
         sh 'docker build -t my-image:latest .'
       }
     }
+    
+     stages {
+        stage('Example') {
+            environment { 
+                ARTIFACTORY_CREDENTIALS = credentials('dockerhub') 
+            }
+            steps {
+                echo "user: $ARTIFACTORY_CREDENTIALS_USR password: $ARTIFACTORY_CREDENTIALS_PSW"
+            }
+        }
+    }
     stage('Docker Push') {
       agent any
       steps {
-      
- 
         withCredentials([usernamePassword(credentialsId: 'dockerHub1', passwordVariable: 'Abcd123456', usernameVariable: 'thankachitra')]) {
           sh "docker login -u 'thankachitra' -p 'Abcd123456'"
           sh 'docker push my-image:latest'
