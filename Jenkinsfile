@@ -29,7 +29,7 @@ pipeline {
         //}
         script{
 	        docker.withRegistry( 'https://hub.docker.com/repository/docker/thankachitra/nodejsrepo', 'dockerhub' ) {
-	        sh "docker login -u 'thankachitra' -p 'Abcd123456'"
+	    //    sh "docker login -u 'thankachitra' -p 'Abcd123456'"
 			sh "docker push 'my-image:${env.BUILD_NUMBER}'"
 			echo "aaaaaaaaa"
 			}
