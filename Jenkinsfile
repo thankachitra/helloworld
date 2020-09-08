@@ -9,29 +9,24 @@ pipeline {
   		 steps {
                 echo "${params.Greeting} World!"
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-                }
-        }
+               }
+    }
     stage('Docker Build') {
-      agent any
-      steps {
-      git 'https://github.com/thankachitra/helloworld.git'
-        sh 'docker build -t my-image:latest .'
-      }
+		 steps {
+		  git 'https://github.com/thankachitra/helloworld.git'
+		sh 'docker build -t my-image:latest .'
+		 }
     }
     
      
-        stage('Examplae') {
-            environment { 
-                ARTIFACTORY_CREDENTIALS = credentials('dockerhub') 
-            }
-            steps {
-                echo "user: $ARTIFACTORY_CREDENTIALS_USR password: $ARTIFACTORY_CREDENTIALS_PSW"
-            }
-        }
+	stage('Examplae') {
+		steps {
+		    echo "user: $ARTIFACTORY_CREDENTIALS_USR password: $ARTIFACTORY_CREDENTIALS_PSW"
+		    }
+	}
 
     stage('Docker Push') {
-      agent any
-      steps {
+    steps {
    //    withCredentials([usernamePassword(credentialsId: 'dockerHub1', passwordVariable: 'Abcd123456', usernameVariable: 'thankachitra')]) {
      //     sh "docker login -u 'thankachitra' -p 'Abcd123456'"
        //   sh 'docker push my-image:latest'
